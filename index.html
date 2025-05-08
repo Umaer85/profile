@@ -2,43 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> My name is Umaer Ahmed </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Personal Website with Clock Background</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    html, body {
       margin: 0;
-      background: #f4f4f4;
-      color: #333;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      font-family: Arial, sans-serif;
     }
+
+    #p5-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    header, nav, section, footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
     header {
-      background-color: #008080;
+      background-color: rgba(0,128,128,0.8);
       color: white;
       padding: 20px;
-      text-align: center;
     }
+
     nav {
-      background: #006666;
+      background: rgba(0,102,102,0.8);
       padding: 10px;
-      text-align: center;
     }
+
     nav a {
       color: white;
       margin: 0 15px;
       text-decoration: none;
     }
+
     section {
       padding: 20px;
+      background-color: rgba(255,255,255,0.8);
+      margin: 20px;
+      border-radius: 10px;
     }
+
     footer {
       text-align: center;
-      background: #008080;
+      background: rgba(0,128,128,0.8);
       color: white;
       padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
     }
+
     button {
       background: #008080;
       color: white;
@@ -47,262 +65,17 @@
       cursor: pointer;
       border-radius: 5px;
     }
+
     button:hover {
       background: #005555;
     }
-    
-.clock {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  background-color: white;
-  border: 10px solid black;
-  border-radius: 100%;
-  transform: rotate(180deg);
-  margin:0 auto;
-}
-.clock:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  width: 20px;
-  height: 20px;
-  border: 5px solid white;
-  background-color: black;
-  border-radius: 100%;
-  z-index: 99;
-}
-
-.clock__hand {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin: auto;
-  height: 8px;
-  background-color: black;
-  transform-origin: 0;
-  transition: transform cubic-bezier(0.1, 2.5, 0.5, 1);
-}
-.clock__hand--hour {
-  width: calc(50% - 250px / 4);
-}
-.clock__hand--minute {
-  width: calc(50% - 250px / 6);
-}
-.clock__hand--second {
-  width: calc(50% - 250px / 10);
-  height: 4px;
-  background-color: red;
-}
-
-.clock__tick {
-  display: block;
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  width: 2px;
-  height: 8px;
-  background-color: lightgray;
-  transform-origin: 0 115px;
-  transform: translateX(-50%);
-}
-.clock__tick:nth-child(5n+1) {
-  width: 4px;
-  height: 16px;
-  background-color: black;
-}
-.clock__tick:nth-child(1) {
-  transform: rotate(0deg) translateX(-50%);
-}
-.clock__tick:nth-child(2) {
-  transform: rotate(6deg) translateX(-50%);
-}
-.clock__tick:nth-child(3) {
-  transform: rotate(12deg) translateX(-50%);
-}
-.clock__tick:nth-child(4) {
-  transform: rotate(18deg) translateX(-50%);
-}
-.clock__tick:nth-child(5) {
-  transform: rotate(24deg) translateX(-50%);
-}
-.clock__tick:nth-child(6) {
-  transform: rotate(30deg) translateX(-50%);
-}
-.clock__tick:nth-child(7) {
-  transform: rotate(36deg) translateX(-50%);
-}
-.clock__tick:nth-child(8) {
-  transform: rotate(42deg) translateX(-50%);
-}
-.clock__tick:nth-child(9) {
-  transform: rotate(48deg) translateX(-50%);
-}
-.clock__tick:nth-child(10) {
-  transform: rotate(54deg) translateX(-50%);
-}
-.clock__tick:nth-child(11) {
-  transform: rotate(60deg) translateX(-50%);
-}
-.clock__tick:nth-child(12) {
-  transform: rotate(66deg) translateX(-50%);
-}
-.clock__tick:nth-child(13) {
-  transform: rotate(72deg) translateX(-50%);
-}
-.clock__tick:nth-child(14) {
-  transform: rotate(78deg) translateX(-50%);
-}
-.clock__tick:nth-child(15) {
-  transform: rotate(84deg) translateX(-50%);
-}
-.clock__tick:nth-child(16) {
-  transform: rotate(90deg) translateX(-50%);
-}
-.clock__tick:nth-child(17) {
-  transform: rotate(96deg) translateX(-50%);
-}
-.clock__tick:nth-child(18) {
-  transform: rotate(102deg) translateX(-50%);
-}
-.clock__tick:nth-child(19) {
-  transform: rotate(108deg) translateX(-50%);
-}
-.clock__tick:nth-child(20) {
-  transform: rotate(114deg) translateX(-50%);
-}
-.clock__tick:nth-child(21) {
-  transform: rotate(120deg) translateX(-50%);
-}
-.clock__tick:nth-child(22) {
-  transform: rotate(126deg) translateX(-50%);
-}
-.clock__tick:nth-child(23) {
-  transform: rotate(132deg) translateX(-50%);
-}
-.clock__tick:nth-child(24) {
-  transform: rotate(138deg) translateX(-50%);
-}
-.clock__tick:nth-child(25) {
-  transform: rotate(144deg) translateX(-50%);
-}
-.clock__tick:nth-child(26) {
-  transform: rotate(150deg) translateX(-50%);
-}
-.clock__tick:nth-child(27) {
-  transform: rotate(156deg) translateX(-50%);
-}
-.clock__tick:nth-child(28) {
-  transform: rotate(162deg) translateX(-50%);
-}
-.clock__tick:nth-child(29) {
-  transform: rotate(168deg) translateX(-50%);
-}
-.clock__tick:nth-child(30) {
-  transform: rotate(174deg) translateX(-50%);
-}
-.clock__tick:nth-child(31) {
-  transform: rotate(180deg) translateX(-50%);
-}
-.clock__tick:nth-child(32) {
-  transform: rotate(186deg) translateX(-50%);
-}
-.clock__tick:nth-child(33) {
-  transform: rotate(192deg) translateX(-50%);
-}
-.clock__tick:nth-child(34) {
-  transform: rotate(198deg) translateX(-50%);
-}
-.clock__tick:nth-child(35) {
-  transform: rotate(204deg) translateX(-50%);
-}
-.clock__tick:nth-child(36) {
-  transform: rotate(210deg) translateX(-50%);
-}
-.clock__tick:nth-child(37) {
-  transform: rotate(216deg) translateX(-50%);
-}
-.clock__tick:nth-child(38) {
-  transform: rotate(222deg) translateX(-50%);
-}
-.clock__tick:nth-child(39) {
-  transform: rotate(228deg) translateX(-50%);
-}
-.clock__tick:nth-child(40) {
-  transform: rotate(234deg) translateX(-50%);
-}
-.clock__tick:nth-child(41) {
-  transform: rotate(240deg) translateX(-50%);
-}
-.clock__tick:nth-child(42) {
-  transform: rotate(246deg) translateX(-50%);
-}
-.clock__tick:nth-child(43) {
-  transform: rotate(252deg) translateX(-50%);
-}
-.clock__tick:nth-child(44) {
-  transform: rotate(258deg) translateX(-50%);
-}
-.clock__tick:nth-child(45) {
-  transform: rotate(264deg) translateX(-50%);
-}
-.clock__tick:nth-child(46) {
-  transform: rotate(270deg) translateX(-50%);
-}
-.clock__tick:nth-child(47) {
-  transform: rotate(276deg) translateX(-50%);
-}
-.clock__tick:nth-child(48) {
-  transform: rotate(282deg) translateX(-50%);
-}
-.clock__tick:nth-child(49) {
-  transform: rotate(288deg) translateX(-50%);
-}
-.clock__tick:nth-child(50) {
-  transform: rotate(294deg) translateX(-50%);
-}
-.clock__tick:nth-child(51) {
-  transform: rotate(300deg) translateX(-50%);
-}
-.clock__tick:nth-child(52) {
-  transform: rotate(306deg) translateX(-50%);
-}
-.clock__tick:nth-child(53) {
-  transform: rotate(312deg) translateX(-50%);
-}
-.clock__tick:nth-child(54) {
-  transform: rotate(318deg) translateX(-50%);
-}
-.clock__tick:nth-child(55) {
-  transform: rotate(324deg) translateX(-50%);
-}
-.clock__tick:nth-child(56) {
-  transform: rotate(330deg) translateX(-50%);
-}
-.clock__tick:nth-child(57) {
-  transform: rotate(336deg) translateX(-50%);
-}
-.clock__tick:nth-child(58) {
-  transform: rotate(342deg) translateX(-50%);
-}
-.clock__tick:nth-child(59) {
-  transform: rotate(348deg) translateX(-50%);
-}
-.clock__tick:nth-child(60) {
-  transform: rotate(354deg) translateX(-50%);
-}
   </style>
 </head>
 <body>
 
   <header>
     <h1>Welcome to My Website</h1>
-    <p>Hello, I'm Umaer Ahmed – IOT Developer </p>
+    <p>Hello, I'm Your Name – Web Developer & Designer</p>
   </header>
 
   <nav>
@@ -313,7 +86,7 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p>I am passionate about iot development, pcb design, and creating clean, user-friendly experiences.</p>
+    <p>I am passionate about web development, design, and creating clean, user-friendly experiences.</p>
   </section>
 
   <section id="projects">
@@ -323,83 +96,143 @@
       <li>JavaScript Clock</li>
       <li>Responsive Blog Template</li>
     </ul>
-    <button onclick="showAlert()">Click Me</button>
-  </section>
-
-  <section>
-    <div>
-      
-<div class="clock" id="new-clock">
-  <div class="clock__ticks"><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span><span class="clock__tick"></span>
-  </div>
-  <div class="clock__hand clock__hand--hour"></div>
-  <div class="clock__hand clock__hand--minute"></div>
-  <div class="clock__hand clock__hand--second"></div>
-</div>
-    </div>
+    <button onclick="alert('Thanks for checking out my projects!')">Click Me</button>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Adarshabag, Konapara, Jatrabari, Dhaka 1362 </p>
+    <p>Email: your.email@example.com</p>
   </section>
 
   <footer>
-    <p>© 2025 Umaer Ahmed </p>
+    <p>© 2025 Your Name</p>
   </footer>
 
-  
-
+  <!-- p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
   <script>
-    function showAlert() {
-      alert("Thanks for checking out my projects!");
-    }
-
     class Clock {
-  constructor(id) {
-    const el = document.getElementById(id);
-    this.handHr = el.querySelector('.clock__hand--hour');
-    this.handMin = el.querySelector('.clock__hand--minute');
-    this.handSec = el.querySelector('.clock__hand--second');
-
-    this.setTime();
-    this.init();
-  }
-
-  tick(hrs, mins, secs) {
-    const degHrs = hrs / 12 * 360 + 90;
-    const degMins = mins / 60 * 360 + 90;
-    const degSecs = secs / 60 * 360 + 90;
-
-    this.handHr.style.transform = `rotate(${degHrs}deg)`;
-    this.handMin.style.transform = `rotate(${degMins}deg)`;
-    this.handSec.style.transform = `rotate(${degSecs}deg)`;
-
-    if (degSecs === 90) {
-      this.handSec.style.transitionDuration = "0s";
-    } else {
-      this.handSec.style.transitionDuration = "0.1s";
+      constructor(settings) {
+        Object.assign(this, {
+          radius: 100,
+          globalPosition: { x: 0, y: 0 },
+          ...settings
+        })
+        
+        this.numItems = 12
+        this.slice = TWO_PI / this.numItems
+        this.setInitialPositions()
+      }
+      
+      draw() {
+        this.drawClock()
+      }
+      
+      update(position) {
+        this.globalPosition = position
+        this.updateItemsPosition()
+      }
+      
+      setInitialPositions() {
+        this.numberListPositions = this.getNumbersListPositions(this.initPosition)
+        this.handsInfo = this.getHandsInfo(this.initPosition)
+      }
+      
+      getNumbersListPositions({ x, y }) {
+        const itemsList = []
+        for (let i = 0; i < this.numItems; i++) {
+          itemsList.push({ x, y })
+        }
+        return itemsList
+      }
+      
+      getHandsInfo({ x, y }) {
+        return [
+          { x, y, length: this.radius * 0.6, weight: 3 },
+          { x, y, length: this.radius * 0.8, weight: 3 },
+          { x, y, length: this.radius * 0.8, weight: 1 }
+        ]
+      }
+      
+      updateItemsPosition() {
+        const { x, y } = this.globalPosition
+        this.numberListPositions.forEach(p => {
+          p.x = x
+          p.y = y
+        })
+        this.handsInfo.forEach(p => {
+          p.x = x
+          p.y = y
+        })
+      }
+      
+      drawClock() {
+        this.drawNumbersRing()
+        this.drawClockHands()
+        const { x, y } = this.globalPosition
+        fill(0)
+        ellipse(x, y, 10)
+      }
+      
+      drawClockHand(length, weight, x, y, angle) {
+        strokeWeight(weight)
+        line(x, y, x + cos(angle) * length, y + sin(angle) * length)
+      }
+      
+      drawNumbersRing() {
+        const { x, y } = this.globalPosition
+        const offset = HALF_PI - ((TWO_PI / 360) * (360 / 12))
+        textAlign(CENTER, CENTER)
+        textSize(20)
+        for (let i = 0; i < this.numberListPositions.length; i++) {
+          text(
+            (i % 12) + 1,
+            x + cos(this.slice * i - offset) * this.radius,
+            y + sin(this.slice * i - offset) * this.radius
+          )
+        }
+      }
+      
+      drawClockHands() {
+        const timeAngles = [
+          map(hour() + norm(minute(), 0, 60), 0, 24, 0, TWO_PI * 2) - HALF_PI,
+          map(minute() + norm(second(), 0, 60), 0, 60, 0, TWO_PI) - HALF_PI,
+          map(second(), 0, 60, 0, TWO_PI) - HALF_PI
+        ]
+        
+        for (let i = 0; i < timeAngles.length; i++) {
+          const { length, weight, x, y } = this.handsInfo[i]
+          this.drawClockHand(length, weight, x, y, timeAngles[i])
+        }
+      }
     }
 
-  }
+    let clock;
 
-  setTime() {
-    const now = new Date();
-    const hrs = now.getHours();
-    const mins = now.getMinutes();
-    const secs = now.getSeconds();
+    function setup() {
+      const canvas = createCanvas(window.innerWidth, window.innerHeight);
+      canvas.id("p5-background");
+      clock = new Clock({
+        initPosition: {
+          x: width / 2,
+          y: height / 2
+        }
+      })
+    }
 
-    this.tick(hrs, mins, secs);
-  }
+    function draw() {
+      background(255);
+      fill(255, 130, 56);
+      clock.draw()
+    }
 
-  init() {
-    setInterval(this.setTime.bind(this), 1000);
-  }}
+    function mouseMoved() {
+      clock.update({ x: mouseX, y: mouseY });
+    }
 
-
-let clock = new Clock("new-clock");
-    
+    function windowResized() {
+      resizeCanvas(window.innerWidth, window.innerHeight);
+    }
   </script>
-
 </body>
 </html>
