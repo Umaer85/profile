@@ -1,106 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESP32 OTA Uploader</title>
-  <style>
-    body {
-      background: #0b111b;
-      color: #fff;
-      font-family: "Segoe UI", sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
-    h1 {
-      color: #00bcd4;
-      margin-bottom: 20px;
-    }
-    input, button {
-      margin: 10px;
-      padding: 10px 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-    }
-    input[type="file"] {
-      background: #1e293b;
-      color: #fff;
-    }
-    input[type="text"] {
-      background: #1e293b;
-      color: #fff;
-      width: 250px;
-    }
-    button {
-      background: #00bcd4;
-      color: #000;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #00eaff;
-    }
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ESP32 OTA Update</title>
+<style>
+  body {font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; color: #222;}
+  h1 {text-align: center; color: #007bff;}
+  input, button {margin: 10px 0; padding: 10px; border-radius: 6px; font-size: 16px;}
+  input[type=file] {width: 100%;}
+  input[type=text] {width: 250px;}
+  button {cursor: pointer; background: #007bff; color: #fff; border: none;}
+  #status {margin-top: 20px; font-weight: bold;}
+</style>
 </head>
 <body>
-  <h1>ESP32 OTA Update</h1>
-  <p>Enter your ESP32 IP and select a firmware (.bin) file:</p>
+<h1>ESP32 OTA Updater</h1>
+<p>Enter ESP32 IP and select firmware (.bin):</p>
 
-  <input type="text" id="espIP" placeholder="e.g. 192.168.1.45"><br>
-  <input type="file" id="file" accept=".bin"><br>
-  <button onclick="uploadFirmware()">Upload Firmware</button>
+<input type="text" id="espIP" placeholder="192.168.x.x"><br>
+<input type="file" id="file" accept=".bin"><br>
+<button onclick="uploadFirmware()">Upload Firmware</button>
 
-  <div id="status"></div>
+<div id="status"></div>
 
-  <script>
-    function uploadFirmware() {
-      const fileInput = document.getElementById('file');
-      const espIP = document.getElementById('espIP').value.trim();
-      const status = document.getElementById('status');
+<script>
+function uploadFirmware() {
+  const fileInput = document.getElementById('file');
+  const espIP = document.getElementById('espIP').value.trim();
+  const status = document.getElementById('status');
 
-      if (!espIP) {
-        status.textContent = "⚠️ Please enter ESP32 IP address!";
-        return;
-      }
-      if (!fileInput.files.length) {
-        status.textContent = "⚠️ Please select a .bin file!";
-        return;
-      }
+  if (!espIP) { status.textContent = "⚠️ Enter ESP32 IP!"; return; }
+  if (!fileInput.files.length) { status.textContent = "⚠️ Select a .bin file!"; return; }
 
-      const file = fileInput.files[0];
-      const xhr = new XMLHttpRequest();
-      const url = `http://${espIP}/update`;
+  const file = fileInput.files[0];
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://${espIP}/update`, true);
 
-      xhr.open('POST', url, true);
-
-      xhr.upload.onprogress = function(e) {
-        if (e.lengthComputable) {
-          const percent = (e.loaded / e.total * 100).toFixed(1);
-          status.textContent = `Uploading... ${percent}%`;
-        }
-      };
-
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          status.textContent = "✅ Update successful! Rebooting ESP32...";
-        } else {
-          status.textContent = "❌ Update failed. ESP32 did not respond.";
-        }
-      };
-
-      xhr.onerror = function() {
-        status.textContent = "❌ Connection error. Check IP and Wi-Fi.";
-      };
-
-      const formData = new FormData();
-      formData.append("file", file);
-      xhr.send(formData);
+  xhr.upload.onprogress = (e) => {
+    if (e.lengthComputable) {
+      const pct = ((e.loaded / e.total) * 100).toFixed(1);
+      status.textContent = `Uploading: ${pct}%`;
     }
-  </script>
+  };
+
+  xhr.onload = () => {
+    if (xhr.status === 200) status.textContent = "✅ Update successful! ESP32 rebooting...";
+    else status.textContent = "❌ Update failed!";
+  };
+
+  xhr.onerror = () => { status.textContent = "❌ Connection error! Check ESP32 IP & network."; };
+
+  const formData = new FormData();
+  formData.append("file", file);
+  xhr.send(formData);
+}
+</script>
 </body>
 </html>
